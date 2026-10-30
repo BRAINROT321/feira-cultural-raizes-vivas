@@ -2,7 +2,7 @@
 
 Site estático em HTML para a feira cultural. Não precisa de instalação nem de etapa de build: abra `index.html` no navegador para visualizar.
 
-Os arquivos de vídeo e áudio ficam apenas no computador e são ignorados pelo Git. A versão publicada usa imagens estáticas.
+Os arquivos de vídeo e áudio ficam apenas no computador e são ignorados pelo Git. Na versão publicada, os vídeos e a música são reproduzidos pelos players incorporados do YouTube, evitando enviar arquivos grandes ao repositório.
 
 ## Publicação
 
