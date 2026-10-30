@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#17211b">
+  <meta name="description" content="Uma viagem vibrante pela cultura africana e afro-brasileira: arte, dança, música e conhecimento.">
+  <title>Raízes Vivas | Feira Cultural</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17211b;
+      --paper: #fffaf0;
+      --orange: #ff6b35;
+      --pink: #e83e8c;
+      --yellow: #ffd447;
+      --teal: #35c9b2;
+      --green: #245c43;
+      --muted: #6b716b;
+      --radius: 24px;
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    * { box-sizing: border-box; }
+    body { margin: 0; color: var(--ink); background: var(--paper); }
+    a { color: inherit; }
+    button, input { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    .wrap { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
+
+    .topbar { position: absolute; z-index: 2; inset: 0 0 auto; color: white; }
+    .nav { min-height: 82px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-size: 1.05rem; font-weight: 900; letter-spacing: .03em; }
+    .brand-mark { display: grid; width: 38px; aspect-ratio: 1; place-items: center; color: var(--ink); background: var(--yellow); border-radius: 50% 50% 12px 50%; transform: rotate(-8deg); }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a { text-decoration: none; font-size: .9rem; font-weight: 700; opacity: .92; }
+    .nav-links a:hover { color: var(--yellow); }
+    .nav-qr { padding: 11px 16px; border: 1px solid #ffffff8a; border-radius: 99px; }
+
+    .hero { position: relative; min-height: 690px; display: flex; align-items: center; overflow: hidden; color: white; background: var(--ink) url("pesafrica-cke.webp") center 43% / cover no-repeat; }
+    .hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, #121b17ed 0%, #121b17bd 47%, #121b1740 100%); }
+    .hero::after { content: ""; position: absolute; width: 340px; height: 340px; border: 1px solid #ffffff33; border-radius: 50%; right: -120px; bottom: -180px; box-shadow: 0 0 0 35px #ffffff12, 0 0 0 70px #ffffff0b; }
+    .hero-content { position: relative; z-index: 1; padding: 130px 0 92px; max-width: 720px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; margin: 0 0 18px; color: var(--yellow); font-size: .78rem; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; }
+    .eyebrow::before { content: ""; width: 28px; height: 3px; background: currentColor; border-radius: 9px; }
+    h1 { max-width: 700px; margin: 0; font-size: clamp(3.2rem, 8vw, 6.7rem); line-height: .92; letter-spacing: -.065em; }
+    h1 span { color: var(--yellow); }
+    .hero-copy { max-width: 560px; margin: 24px 0 30px; color: #f3f0e9; font-size: clamp(1.05rem, 2vw, 1.2rem); line-height: 1.7; }
+    .button { display: inline-flex; justify-content: center; align-items: center; gap: 10px; min-height: 50px; padding: 0 22px; border: 0; border-radius: 999px; color: var(--ink); background: var(--yellow); text-decoration: none; font-weight: 900; cursor: pointer; transition: transform .2s, box-shadow .2s; }
+    .button:hover { transform: translateY(-2px); box-shadow: 0 8px 24px #0002; }
+    .button-dark { color: white; background: var(--ink); }
+    .hero-note { display: inline-block; margin-left: 16px; color: #ffffffbd; font-size: .88rem; }
+
+    .ticker { overflow: hidden; color: var(--ink); background: var(--yellow); }
+    .ticker-inner { min-height: 58px; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 14px 28px; font-size: .82rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+    .ticker-inner span:nth-child(3n+1) { color: #c23a22; }
+    .ticker-dot { color: var(--pink); font-size: 1.25rem; }
+
+    section { padding: 92px 0; }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 34px; }
+    .section-heading h2 { max-width: 620px; margin: 0; font-size: clamp(2.2rem, 5vw, 3.8rem); line-height: 1; letter-spacing: -.055em; }
+    .section-heading p { max-width: 370px; margin: 0; color: var(--muted); line-height: 1.65; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .card { position: relative; min-height: 360px; overflow: hidden; border-radius: var(--radius); background: #d7d0bc; isolation: isolate; }
+    .card img { position: absolute; z-index: -2; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+    .card:hover img { transform: scale(1.05); }
+    .card::after { content: ""; position: absolute; z-index: -1; inset: 30% 0 0; background: linear-gradient(transparent, #111b18e8); }
+    .card-content { position: absolute; inset: auto 22px 22px; color: white; }
+    .tag { display: inline-block; margin-bottom: 10px; padding: 7px 11px; border-radius: 99px; color: var(--ink); background: var(--yellow); font-size: .72rem; font-weight: 900; letter-spacing: .06em; text-transform: uppercase; }
+    .card h3 { margin: 0 0 7px; font-size: 1.55rem; }
+    .card p { max-width: 310px; margin: 0; color: #ffffffdc; font-size: .92rem; line-height: 1.55; }
+
+    .history { background: #fff1d2; }
+    .history-layout { display: grid; grid-template-columns: 1.2fr .8fr; align-items: start; gap: 34px; }
+    .timeline { position: relative; display: grid; gap: 24px; margin: 0; padding: 0 0 0 29px; list-style: none; }
+    .timeline::before { position: absolute; top: 8px; bottom: 8px; left: 7px; width: 3px; border-radius: 9px; background: var(--orange); content: ""; }
+    .timeline li { position: relative; padding: 0 0 5px 16px; }
+    .timeline li::before { position: absolute; top: 4px; left: -28px; width: 15px; height: 15px; border: 3px solid #fff1d2; border-radius: 50%; background: var(--pink); box-shadow: 0 0 0 2px var(--pink); content: ""; }
+    .timeline-period { color: #b94122; font-size: .75rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+    .timeline h3 { margin: 7px 0; font-size: 1.25rem; }
+    .timeline p { max-width: 680px; margin: 0; color: #54564e; font-size: .94rem; line-height: 1.65; }
+    .history-note { padding: 26px; border-radius: var(--radius); color: white; background: var(--green); }
+    .history-note-icon { display: grid; width: 46px; aspect-ratio: 1; place-items: center; margin-bottom: 20px; border-radius: 50%; color: var(--ink); background: var(--yellow); font-size: 1.4rem; }
+    .history-note .eyebrow { margin-bottom: 10px; }
+    .history-note h3 { margin: 0 0 12px; font-size: 1.65rem; line-height: 1.1; }
+    .history-note > p:not(.eyebrow) { margin: 0; color: #e3efe7; font-size: .94rem; line-height: 1.65; }
+    .history-note a { display: inline-block; margin-top: 20px; color: var(--yellow); font-size: .88rem; font-weight: 900; text-decoration: none; }
+    .history-film { display: grid; grid-template-columns: .8fr 1.2fr; gap: 26px; align-items: center; margin-top: 38px; padding: 24px; border-radius: var(--radius); background: white; }
+    .history-film-copy h3 { margin: 0 0 8px; font-size: 1.35rem; }
+    .history-film-copy p { margin: 0; color: var(--muted); font-size: .9rem; line-height: 1.6; }
+    .history-film .tag { margin-bottom: 12px; }
+    .history-film > img { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: 15px; object-fit: cover; }
+
+    .experience { color: white; background: var(--green); }
+    .experience .section-heading p { color: #e3efe7; }
+    .media-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    .media-card { overflow: hidden; border-radius: var(--radius); background: #183e2d; }
+    .media-card > img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+    .media-copy { padding: 20px 22px 22px; }
+    .media-copy h3 { margin: 0 0 7px; font-size: 1.3rem; }
+    .media-copy p { margin: 0; color: #d5e5d9; font-size: .9rem; line-height: 1.55; }
+    .audio-card { display: flex; min-height: 100%; align-items: center; gap: 22px; padding: 28px; color: var(--ink); background: var(--teal); }
+    .audio-icon { display: grid; flex: 0 0 70px; aspect-ratio: 1; place-items: center; border-radius: 50%; background: var(--yellow); font-size: 2rem; }
+    .audio-card .media-copy { padding: 0; }
+    .audio-card .media-copy p { color: #193b34; }
+    .gallery { background: #fff1d2; }
+    .gallery-grid { display: grid; grid-template-columns: 1.15fr .85fr 1fr; grid-template-rows: 210px 210px; gap: 14px; }
+    .gallery-grid img { width: 100%; height: 100%; min-height: 0; object-fit: cover; border-radius: 18px; }
+    .gallery-grid img:first-child { grid-row: span 2; }
+    .gallery-grid img:last-child { grid-column: span 2; }
+
+    .qr-section { padding: 82px 0; background: var(--pink); }
+    .qr-panel { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 40px; padding: clamp(26px, 5vw, 54px); border-radius: 30px; background: var(--yellow); }
+    .qr-panel h2 { max-width: 590px; margin: 0 0 14px; font-size: clamp(2.1rem, 5vw, 3.7rem); line-height: .98; letter-spacing: -.055em; }
+    .qr-panel p { max-width: 560px; margin: 0; color: #4a4536; line-height: 1.6; }
+    .qr-form { display: flex; gap: 9px; margin-top: 22px; }
+    .qr-form input { width: min(440px, 100%); min-width: 0; min-height: 48px; padding: 0 15px; border: 1px solid #554f3e55; border-radius: 12px; background: #fffdf6; }
+    .qr-form .button { min-height: 48px; border-radius: 12px; background: var(--ink); color: white; }
+    .qr-message { min-height: 1.4em; margin-top: 10px !important; font-size: .88rem; }
+    .qr-code { display: grid; width: 190px; min-height: 190px; place-items: center; padding: 12px; border-radius: 18px; background: white; box-shadow: 0 10px 24px #67451c24; }
+    .qr-code img { display: none; width: 166px; height: 166px; }
+    .qr-empty { max-width: 145px; color: #6b6656; text-align: center; font-size: .83rem; line-height: 1.5; }
+
+    footer { padding: 27px 0; color: #e5e8e4; background: var(--ink); }
+    .footer-inner { display: flex; justify-content: space-between; gap: 18px; align-items: center; font-size: .85rem; }
+    footer p { margin: 0; }
+    footer a { color: var(--yellow); text-decoration: none; }
+
+    @media (max-width: 760px) {
+      .wrap { width: min(100% - 30px, 560px); }
+      .nav { min-height: 70px; }
+      .nav-links { gap: 12px; }
+      .nav-links a:not(.nav-qr) { display: none; }
+      .hero { min-height: 630px; background-position: 58% center; }
+      .hero-content { padding-top: 120px; }
+      .hero-note { display: block; margin: 15px 0 0; }
+      section { padding: 70px 0; }
+      .section-heading { align-items: start; flex-direction: column; }
+      .cards { grid-template-columns: 1fr; }
+      .card { min-height: 390px; }
+      .history-layout, .history-film { grid-template-columns: 1fr; }
+      .history-note { order: -1; }
+      .media-grid { grid-template-columns: 1fr; }
+      .audio-card { min-height: 240px; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 240px 160px 160px; }
+      .gallery-grid img:first-child { grid-row: span 1; grid-column: span 2; }
+      .gallery-grid img:last-child { grid-column: span 1; }
+      .qr-panel { grid-template-columns: 1fr; justify-items: center; }
+      .qr-panel > div:first-child { width: 100%; }
+      .qr-code { width: 190px; }
+    }
+    @media (max-width: 430px) {
+      .qr-form { flex-direction: column; }
+      .qr-form .button { width: 100%; }
+      .footer-inner { align-items: start; flex-direction: column; }
+      .ticker-inner { gap: 8px 13px; font-size: .68rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav wrap" aria-label="Navegação principal">
+      <a class="brand" href="#inicio"><span class="brand-mark" aria-hidden="true">✦</span> RAÍZES VIVAS</a>
+      <div class="nav-links">
+        <a href="#historia">História</a>
+        <a href="#descobrir">Descubra</a>
+        <a href="#experiencias">Experiências</a>
+        <a class="nav-qr" href="#qr">Acesse pelo QR ↗</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="wrap">
+        <div class="hero-content">
+          <p class="eyebrow">Feira cultural · saberes que conectam</p>
+          <h1>Uma cultura<br>que <span>pulsa.</span></h1>
+          <p class="hero-copy">Uma jornada vibrante por histórias, ritmos, movimentos e expressões que atravessam gerações. Chegue mais perto, descubra e celebre.</p>
+          <a class="button" href="#descobrir">Explore a feira <span aria-hidden="true">↓</span></a>
+          <span class="hero-note">Conhecimento, encontro e muita energia.</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="ticker" aria-label="Temas da feira">
+      <div class="ticker-inner">
+        <span>Arte</span><span class="ticker-dot">✳</span><span>Memória</span><span class="ticker-dot">✳</span>
+        <span>Dança</span><span class="ticker-dot">✳</span><span>Identidade</span><span class="ticker-dot">✳</span><span>Musicalidade</span>
+      </div>
+    </div>
+
+    <section class="history" id="historia" aria-labelledby="history-title">
+      <div class="wrap">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow" style="color: var(--orange)">Antes de tudo, conhecer</p>
+            <h2 id="history-title">História da África:<br>muitas histórias.</h2>
+          </div>
+          <p>A África é um continente imenso, com muitos povos, línguas e trajetórias. Sua história não cabe em um único país, período ou explicação.</p>
+        </div>
+        <div class="history-layout">
+          <ol class="timeline">
+            <li>
+              <span class="timeline-period">Raízes antigas</span>
+              <h3>Sociedades, saberes e cidades</h3>
+              <p>Há milhares de anos, diferentes sociedades africanas desenvolveram agricultura, metalurgia, centros urbanos e redes de conhecimento. Kemet (Egito antigo), Kush e Axum são exemplos entre muitos outros.</p>
+            </li>
+            <li>
+              <span class="timeline-period">Reinos e conexões</span>
+              <h3>Comércio e grandes impérios</h3>
+              <p>Gana, Mali e Songhai se destacaram em redes comerciais transaarianas. Cidades como Tombuctu reuniram estudiosos e bibliotecas; no litoral oriental, povos suaílis conectaram cidades pelo comércio marítimo.</p>
+            </li>
+            <li>
+              <span class="timeline-period">Séculos XV–XIX e além</span>
+              <h3>Violência, colonização e resistência</h3>
+              <p>O tráfico transatlântico escravizou e deslocou milhões de africanos. No século XIX, potências europeias ampliaram a ocupação colonial. Povos africanos resistiram de muitas formas e lutaram por independência, conquistada por diferentes países sobretudo a partir de meados do século XX.</p>
+            </li>
+            <li>
+              <span class="timeline-period">Diáspora e presente</span>
+              <h3>Heranças vivas no Brasil</h3>
+              <p>A presença e a resistência de povos africanos e seus descendentes marcaram profundamente a formação do Brasil. Capoeira, samba, maracatu e religiões de matriz africana são expressões diversas dessa herança, que segue viva e em transformação.</p>
+            </li>
+          </ol>
+          <aside class="history-note">
+            <span class="history-note-icon" aria-hidden="true">✦</span>
+            <p class="eyebrow">Uma ideia importante</p>
+            <h3>A África não é um país — nem tem uma história só.</h3>
+            <p>O continente reúne mais de 50 países e uma enorme diversidade de povos e culturas. Conhecer essa pluralidade ajuda a evitar generalizações e a valorizar as contribuições africanas para o mundo.</p>
+            <a href="#experiencias">Explore imagens e expressões culturais ↓</a>
+          </aside>
+        </div>
+        <article class="history-film">
+          <div class="history-film-copy">
+            <span class="tag" style="background: var(--teal)">Olhar crítico</span>
+            <h3>Histórias complexas pedem cuidado</h3>
+            <p>Expressões como “atraso no desenvolvimento” podem simplificar uma história complexa. Ao encontrar esse tipo de explicação, questione quais fatores históricos são apresentados e lembre-se de que não existe uma resposta única para as realidades de um continente tão diverso.</p>
+          </div>
+          <img src="20170706_00_arte-africana.jpg" alt="Ilustração de pessoas dançando ao som de tambores" loading="lazy">
+        </article>
+      </div>
+    </section>
+
+    <section id="descobrir">
+      <div class="wrap">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow" style="color: var(--pink)">Uma viagem em muitas cores</p>
+            <h2>Descubra o que<br>faz a cultura pulsar.</h2>
+          </div>
+          <p>Olhe de perto: cada imagem, passo e som conta uma história. Explore algumas das expressões culturais presentes na nossa feira.</p>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <img src="20170706_00_arte-africana.jpg" alt="Ilustração de pessoas dançando ao som de tambores">
+            <div class="card-content">
+              <span class="tag">Movimento</span>
+              <h3>Dança e tradição</h3>
+              <p>Corpo, ritmo e comunidade em expressões que carregam histórias.</p>
+            </div>
+          </article>
+          <article class="card">
+            <img src="images.jpg" alt="Mãos tocando um tambor tradicional">
+            <div class="card-content">
+              <span class="tag" style="background: var(--teal)">Ritmo</span>
+              <h3>O som que une</h3>
+              <p>Toques e cantos que conectam pessoas e atravessam gerações.</p>
+            </div>
+          </article>
+          <article class="card">
+            <img src="Pantsula_-_Pretoria___Mabopane_-_Troopsula_-_011_1200x1200.jpg" alt="Grupo de dançarinos de pantsula em movimento">
+            <div class="card-content">
+              <span class="tag" style="background: #ff9ec9">Identidade</span>
+              <h3>Cultura em movimento</h3>
+              <p>Estilo, criatividade e expressão coletiva nas ruas e nos palcos.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="experience" id="experiencias">
+      <div class="wrap">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Uma cultura em movimento</p>
+            <h2>Expressões que<br>atravessam gerações.</h2>
+          </div>
+          <p>Um passeio por encontros, arte, dança e musicalidade, em imagens que celebram a diversidade cultural.</p>
+        </div>
+        <div class="media-grid">
+          <article class="media-card">
+            <img src="e922607c5e73662ba23c89e346ffbf04.jpg" alt="Pessoas celebrando juntas em um encontro cultural" loading="lazy">
+            <div class="media-copy">
+              <h3>Encontro e celebração</h3>
+              <p>Uma escola recebe famílias em um dia de convivência, cultura e alegria.</p>
+            </div>
+          </article>
+          <article class="media-card">
+            <img src="dancas-africanas-e1655679851992.jpg" alt="Ilustração de danças africanas" loading="lazy">
+            <div class="media-copy">
+              <h3>Arte que ganha vida</h3>
+              <p>Uma expressão visual marcante apresentada no festival de arte de rua Chale Wote.</p>
+            </div>
+          </article>
+          <article class="media-card">
+            <img src="20170706_00_arte-africana.jpg" alt="Ilustração de pessoas dançando ao som de tambores" loading="lazy">
+            <div class="media-copy">
+              <h3>História da dança afro</h3>
+              <p>Conheça a dança afro e observe como movimento, memória e identidade se encontram.</p>
+            </div>
+          </article>
+          <article class="media-card audio-card">
+            <div class="audio-icon" aria-hidden="true">♫</div>
+            <div class="media-copy">
+              <span class="tag" style="background: white">Musicalidade</span>
+              <h3>Sons que conectam</h3>
+              <p>Ritmos e cantos aproximam pessoas e atravessam gerações, mantendo vivas muitas histórias.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery" aria-labelledby="gallery-title">
+      <div class="wrap">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow" style="color: var(--orange)">Nossa galeria</p>
+            <h2 id="gallery-title">Um pouco do<br>que inspira.</h2>
+          </div>
+          <p>Imagens para celebrar a arte, a dança e a riqueza das culturas africanas e afro-brasileiras.</p>
+        </div>
+        <div class="gallery-grid">
+          <img src="pesafrica-cke.webp" alt="Pés em movimento durante uma dança tradicional">
+          <img src="9279d4f-5770-professores-evangelicos-impedem-ensino-da-historia-e-cultura-africana-nas-escolas-diz-especialista.avif" alt="Imagem sobre a importância do ensino da história e cultura africana">
+          <img src="dancas-africanas-e1655679851992.jpg" alt="Ilustração de danças africanas">
+          <img src="e922607c5e73662ba23c89e346ffbf04.jpg" alt="Pessoas celebrando juntas em um encontro cultural">
+        </div>
+      </div>
+    </section>
+
+    <section class="qr-section" id="qr">
+      <div class="wrap">
+        <div class="qr-panel">
+          <div>
+            <p class="eyebrow" style="color: var(--pink)">Leve a feira com você</p>
+            <h2>Escaneie.<br>Explore. Compartilhe.</h2>
+            <p>Depois de publicar este site, cole o link público aqui. Endereços como localhost só funcionam no próprio computador e não abrem pelo celular.</p>
+            <form class="qr-form" id="qr-form">
+              <label for="site-url" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Link público do site</label>
+              <input id="site-url" type="url" inputmode="url" placeholder="https://seusite.com.br" autocomplete="url" required>
+              <button class="button" type="submit">Gerar QR Code</button>
+            </form>
+            <p class="qr-message" id="qr-message" aria-live="polite">O QR Code precisa de um link público para que todos consigam abrir a página.</p>
+          </div>
+          <div class="qr-code" aria-label="QR Code do site">
+            <img id="qr-image" alt="QR Code para abrir o site da feira cultural">
+            <span class="qr-empty" id="qr-empty">Seu QR Code vai aparecer aqui.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner wrap">
+      <p><strong>RAÍZES VIVAS</strong> · Feira Cultural</p>
+      <p>Feito para aprender, celebrar e compartilhar. <a href="#inicio">Voltar ao topo ↑</a></p>
+    </div>
+  </footer>
+
+  <script>
+    const form = document.querySelector("#qr-form");
+    const urlInput = document.querySelector("#site-url");
+    const qrImage = document.querySelector("#qr-image");
+    const qrEmpty = document.querySelector("#qr-empty");
+    const qrMessage = document.querySelector("#qr-message");
+
+    if (window.location.protocol === "https:" || window.location.protocol === "http:") {
+      urlInput.value = window.location.href.split("#")[0];
+    }
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const target = urlInput.value.trim();
+
+      try {
+        const parsedUrl = new URL(target);
+        if (parsedUrl.protocol !== "https:" && parsedUrl.protocol !== "http:") {
+          throw new Error("Use um endereço que comece com http:// ou https://.");
+        }
+
+        const hostname = parsedUrl.hostname.toLowerCase().replace(/^\[|\]$/g, "");
+        if (
+          hostname === "localhost" ||
+          hostname.endsWith(".localhost") ||
+          hostname.endsWith(".local") ||
+          hostname === "0.0.0.0" ||
+          hostname === "::1" ||
+          /^127\./.test(hostname)
+        ) {
+          throw new Error("Esse endereço só funciona na rede local. Publique o site e use o link público para que o celular consiga abri-lo.");
+        }
+
+        qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=8&data=${encodeURIComponent(parsedUrl.href)}`;
+        qrImage.alt = `QR Code para abrir ${parsedUrl.hostname}`;
+        qrImage.style.display = "block";
+        qrEmpty.style.display = "none";
+        qrMessage.textContent = "Pronto! Escaneie o código para abrir o endereço informado.";
+      } catch (error) {
+        qrImage.removeAttribute("src");
+        qrImage.style.display = "none";
+        qrEmpty.style.display = "block";
+        qrMessage.textContent = error instanceof Error ? error.message : "Não foi possível gerar o QR Code.";
+      }
+    });
+
+    qrImage.addEventListener("error", () => {
+      qrImage.style.display = "none";
+      qrEmpty.style.display = "block";
+      qrMessage.textContent = "Não foi possível carregar o QR Code. Verifique sua conexão e tente novamente.";
+    });
+  </script>
+</body>
+</html>
